@@ -174,6 +174,9 @@ double SMCGetTemperature(char *key)
                 // convert fp78 value to temperature
                 int intValue = (val.bytes[0] * 256 + val.bytes[1]) >> 2;
                 return intValue / 64.0;
+            } else if (strcmp(val.dataType, DATATYPE_FLT) == 0) {
+                // Some later models use the ftp type for this key
+                return _flttof((unsigned char *)val.bytes);
             }
         }
     }
@@ -285,8 +288,16 @@ const char* getBatteryHealth() {
 
     const char *batteryHealth = CFStringGetCStringPtr(batteryHealthRef, // CFStringRef theString,
                                                 kCFStringEncodingMacRoman); //CFStringEncoding encoding);
-    if(batteryHealth == NULL)
+    if(batteryHealth == NULL) {
+        static char buffer[64];
+        if (CFStringGetCString(batteryHealthRef,    // CFStringRef theString,
+                        buffer,                     // char *buffer,
+                        sizeof(buffer),             // CFIndex bufferSize,
+                        kCFStringEncodingMacRoman)) // CFStringEncoding encoding);
+            return buffer;
+
         return "unknown";
+    }
 
     return batteryHealth;
 }
