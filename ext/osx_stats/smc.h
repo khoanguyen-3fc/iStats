@@ -39,7 +39,7 @@
 #define DATATYPE_FLT          "flt "
 
 // key values
-#define SMC_KEY_CPU_TEMP      "TC0P"
+#define SMC_KEY_CPU_TEMP      "Te0P"
 #define SMC_KEY_FAN_SPEED     "F%dAc"
 #define SMC_KEY_MIN_FAN_SPEED "F%dMn"
 #define SMC_KEY_MAX_FAN_SPEED "F%dMx"

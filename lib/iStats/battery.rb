@@ -76,13 +76,13 @@ module IStats
       # Current max capacity
       #
       def cur_max_capacity
-        grep_ioreg("MaxCapacity")
+        grep_ioreg("AppleRawMaxCapacity")
       end
 
       # Current capacity
       #
       def cur_capacity
-        grep_ioreg("CurrentCapacity")
+        grep_ioreg("AppleRawCurrentCapacity")
       end
 
       # Print battery capacity info
