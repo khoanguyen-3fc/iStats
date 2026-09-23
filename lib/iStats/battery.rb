@@ -64,7 +64,7 @@ module IStats
       #
       def grep_ioreg(keyword)
         @ioreg_out ||= %x( ioreg -rn AppleSmartBattery )
-        capacity = @ioreg_out[/"#{keyword}" = ([0-9]*)/, 1]
+        capacity = @ioreg_out[/"#{keyword}"=([0-9]*)/, 1]
       end
 
       # Original max capacity
@@ -76,13 +76,13 @@ module IStats
       # Current max capacity
       #
       def cur_max_capacity
-        grep_ioreg("AppleRawMaxCapacity")
+        grep_ioreg("NominalChargeCapacity")
       end
 
       # Current capacity
       #
       def cur_capacity
-        grep_ioreg("AppleRawCurrentCapacity")
+        grep_ioreg("RemainingCapacity")
       end
 
       # Print battery capacity info
