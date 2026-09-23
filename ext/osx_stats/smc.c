@@ -288,16 +288,8 @@ const char* getBatteryHealth() {
 
     const char *batteryHealth = CFStringGetCStringPtr(batteryHealthRef, // CFStringRef theString,
                                                 kCFStringEncodingMacRoman); //CFStringEncoding encoding);
-    if(batteryHealth == NULL) {
-        static char buffer[64];
-        if (CFStringGetCString(batteryHealthRef,    // CFStringRef theString,
-                        buffer,                     // char *buffer,
-                        sizeof(buffer),             // CFIndex bufferSize,
-                        kCFStringEncodingMacRoman)) // CFStringEncoding encoding);
-            return buffer;
-
+    if(batteryHealth == NULL)
         return "unknown";
-    }
 
     return batteryHealth;
 }
